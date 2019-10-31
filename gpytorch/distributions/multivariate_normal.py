@@ -13,7 +13,7 @@ from .distribution import Distribution
 from ..utils.broadcasting import _mul_broadcast_shape
 
 
-class _MultivariateNormalBase(TMultivariateNormal, Distribution):
+class MultivariateNormal(TMultivariateNormal, Distribution):
     """
     Constructs a multivariate Normal random variable, based on mean and covariance
     Can be multivariate, or a batch of multivariate Normals
@@ -210,20 +210,6 @@ class _MultivariateNormalBase(TMultivariateNormal, Distribution):
 
     def __truediv__(self, other):
         return self.__mul__(1.0 / other)
-
-
-try:
-    # If pyro is installed, add the TorchDistributionMixin
-    from pyro.distributions.torch_distribution import TorchDistributionMixin
-
-    class MultivariateNormal(_MultivariateNormalBase, TorchDistributionMixin):
-        pass
-
-
-except ImportError:
-
-    class MultivariateNormal(_MultivariateNormalBase):
-        pass
 
 
 @register_kl(MultivariateNormal, MultivariateNormal)

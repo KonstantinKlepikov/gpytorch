@@ -3,7 +3,7 @@
 from torch.distributions import Distribution as TDistribution
 
 
-class Distribution(TDistribution):
+class _DistributionBase(TDistribution):
     @property
     def islazy(self):
         return self._islazy
@@ -16,3 +16,17 @@ class Distribution(TDistribution):
 
     def __mul__(self, other):
         raise NotImplementedError()
+
+
+try:
+    # If pyro is installed, add the TorchDistributionMixin
+    from pyro.distributions.torch_distribution import TorchDistributionMixin
+
+    class Distribution(_DistributionBase, TorchDistributionMixin):
+        pass
+
+
+except ImportError:
+
+    class Distribution(_DistributionBase):
+        pass
