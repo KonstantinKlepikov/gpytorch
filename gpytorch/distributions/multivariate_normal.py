@@ -186,7 +186,7 @@ class MultivariateNormal(TMultivariateNormal, Distribution):
             return super().variance
 
     def __add__(self, other):
-        if isinstance(other, _MultivariateNormalBase):
+        if isinstance(other, MultivariateNormal):
             return self.__class__(
                 mean=self.mean + other.mean,
                 covariance_matrix=(self.lazy_covariance_matrix + other.lazy_covariance_matrix),
