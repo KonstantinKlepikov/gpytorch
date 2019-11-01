@@ -23,8 +23,7 @@ class MultivariateNormal(TMultivariateNormal, Distribution):
 
     Args:
         mean (Tensor): vector n or matrix b x n mean of MVN distribution
-        covar (Tensor): matrix n x n or batch matrix b x n x n covariance of
-            MVN distribution
+        covar (Tensor): matrix n x n or batch matrix b x n x n covariance of MVN distribution
     """
 
     def __init__(self, mean, covariance_matrix, validate_args=False):
