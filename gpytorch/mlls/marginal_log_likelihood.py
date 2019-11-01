@@ -31,3 +31,9 @@ class MarginalLogLikelihood(Module):
         - target: (Variable) - the target values
         """
         raise NotImplementedError
+
+    def pyro_factor(self, output, target):
+        """
+        As forward, but register the loss with pyro using the pyro.factor primitive.
+        """
+        raise NotImplementedError
